@@ -1,2 +1,4 @@
 discord
 python_dotenv
+pynacl
+youtube_dl

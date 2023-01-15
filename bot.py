@@ -1,6 +1,8 @@
 import os
 import discord
 import csv
+import nacl
+from youtube_dl import YoutubeDL
 
 from dotenv import load_dotenv
 
@@ -105,6 +107,21 @@ async def on_message(message):
 
     if text[:13] == "!disassociate":
         await message.channel.send("The command is \"`!dissociate`\", y'know 😉")
+
+    if not message.author.bot and "gaming" in text:
+        await message.channel.send('bouta be gaming myself')
+        vc = message.author.voice.channel
+        if not vc == None:            
+            # vcClient = discord.VoiceClient(client,vc)
+            player = await vc.connect()
+            # FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+            # await player.play(discord.FFmpegPCMAudio("https://www.youtube.com/watch?v=-gJT17gkCHY"))
+            await player.disconnect()
+            
+            # await vcClient.join_voice_channel(vc)
+            
+
+
 
     for word,emojis in associations.items():
         if word in text:
